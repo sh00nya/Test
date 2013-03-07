@@ -27,8 +27,8 @@ public class APICLASS {
     
     private void doLogin()
     {
-    	String userName="rigid.asit@gmail.com";
-    	String passwd="ready2workYUHNT8btAQt2Sa7AlKUCnSGO";
+    	String userName="";
+    	String passwd="";
     	if(userName.length()==0 || passwd.length()==0)
     		return;
     	try
