@@ -1,4 +1,4 @@
-package sfdcAPI;
+package ForceAPI;
 
 import java.rmi.RemoteException;
 import java.io.*;
@@ -27,8 +27,8 @@ public class APICLASS {
     
     private void doLogin()
     {
-    	String userName="";
-    	String passwd="";
+    	String userName="rigid.asit@gmail.com";
+    	String passwd="ready2workYUHNT8btAQt2Sa7AlKUCnSGO";
     	if(userName.length()==0 || passwd.length()==0)
     		return;
     	try
@@ -84,19 +84,26 @@ public class APICLASS {
     	{
 	    	DescribeGlobalResult describeGlobalResult =binding.describeGlobal();
 	    	DescribeGlobalSObjectResult[] sobjectResults = describeGlobalResult.getSobjects();
+	    	int cnt=0;
 	    	for (int i = 0; i < sobjectResults.length; i++)
 	    	{
-	    		
+
 	    			String objName=sobjectResults[i].getName();
 	    			DescribeSObjectResult describeSObjectResult =binding.describeSObject(objName);
 	    			if (describeSObjectResult != null)
 	    			{
 	    				if (describeSObjectResult.isCreateable())
 	    				{
-	    					
+	    					//System.out.println(describeSObjectResult.getName());
+	    					if(!describeSObjectResult.getName().endsWith("__c") )
+	    					{
+	    						System.out.println(describeSObjectResult.getName());
+	    						cnt++;
+	    					}
 	    				}
 	    			}
 	    	}
+	    	System.out.println("Total Standard Object=="+cnt);
     	}
     	
     	catch(RemoteException re)
@@ -110,5 +117,6 @@ public class APICLASS {
     {
     	APICLASS ap=new APICLASS();
     	ap.doLogin();
+    	ap.sObjectField();
     }
 }
